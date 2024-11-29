@@ -649,6 +649,7 @@ let jumps = 0
 let FLOWER: Sprite = null
 let game_started = false
 game_started = false
+Intro()
 story.setSoundEnabled(true)
 FLOWER = sprites.create(img`
     . . . 5 . . . 
