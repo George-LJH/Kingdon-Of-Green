@@ -1,5 +1,6 @@
 {
     "name": "Kingdom of Green",
+    "version": "1.0.0",
     "description": "Save the Kingdom of Green!",
     "dependencies": {
         "device": "*",
@@ -34,15 +35,8 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj",
-    "theme": {
-        "skin": "zune",
-        "background-color": "#123456",
-        "button-stroke": "#654321",
-        "text-color": "#321456",
-        "button-fill": "#deadea",
-        "dpad-fill": "#abcdef"
-    },
+    "preferredEditor": "blocksprj",
+    "theme": "zune",
     "palette": [
         "#000000",
         "#FFFFFF",

@@ -180,6 +180,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     info.setLife(-1)
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
+    sprites.destroy(sprite, effects.fire, 500)
+})
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
 })
@@ -1381,6 +1384,28 @@ l1r2 = 2
 weapon_cooldown = true
 dash_cooldown = true
 let volume_change = 20
+let mySprite2 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . a . . . . . . . . . . . 
+    . . . a a a a . . . . . . a . . 
+    a . a a a a a a . . . a a a a . 
+    a a a a a a a a a a a a a a a a 
+    a a a f f a a a a a a f f a a a 
+    a a a f f a a a a a a f f a a a 
+    a a a f f a a a a a a f f a a a 
+    a a a f f a a a a a a f f a a a 
+    a a a a a a a a a a a a a a a a 
+    a a f f f f f f f f f f f f a a 
+    a a f f f f f f f f f f f f a a 
+    a a f f a a a a a a a a f f a a 
+    `, SpriteKind.Enemy)
+tiles.placeOnTile(mySprite2, tiles.getTileLocation(11, 10))
+mySprite2.vx = 50
+mySprite2.setBounceOnWall(true)
+mySprite2.ay = 200
 forever(function () {
     if (l1r2 == 1) {
         characterAnimations.setCharacterState(FLOWER, characterAnimations.rule(Predicate.FacingLeft, Predicate.MovingLeft))
