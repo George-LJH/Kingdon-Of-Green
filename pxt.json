@@ -1,6 +1,6 @@
 {
     "name": "Kingdom of Green",
-    "description": "",
+    "description": "Save the Kingdom of Green!",
     "dependencies": {
         "device": "*",
         "sprite-scaling": "*",
