@@ -1,0 +1,63 @@
+{
+    "name": "Kingdom of Green",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "sprite-scaling": "*",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "arcade-simple-text": "github:riknoll/arcade-simple-text#v0.1.0",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
+        "Tile Animator": "github:LautaroCeballos/Tiles-Animator#2e87fd85737dcf61210ea9004eac2167c1e59fb6",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "arcade-particle-effects": "github:jwunderl/arcade-particle-effects#v0.0.2",
+        "Timers": "github:microsoft/arcade-timers#v1.1.0"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "1.12.57",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj",
+    "theme": {
+        "skin": "zune",
+        "background-color": "#123456",
+        "button-stroke": "#654321",
+        "text-color": "#321456",
+        "button-fill": "#deadea",
+        "dpad-fill": "#abcdef"
+    },
+    "palette": [
+        "#000000",
+        "#FFFFFF",
+        "#313432",
+        "#323E42",
+        "#454B4B",
+        "#3A5F3B",
+        "#7C4545",
+        "#675239",
+        "#625055",
+        "#516B43",
+        "#EE4B2B",
+        "#718245",
+        "#9E805C",
+        "#998579",
+        "#AC9086",
+        "#000000"
+    ]
+}
