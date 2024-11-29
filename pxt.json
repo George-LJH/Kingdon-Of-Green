@@ -1,5 +1,6 @@
 {
     "name": "Kingdom of Green",
+    "version": "1.0.0",
     "description": "Save the Kingdom of Green!",
     "dependencies": {
         "device": "*",
