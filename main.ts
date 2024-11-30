@@ -1,6 +1,9 @@
 namespace SpriteKind {
     export const INTRO = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
+    game.gameOver(false)
+})
 function FADE_BLACK (FOR_HOW_LONG: number) {
     pause(1000)
     color.startFade(color.originalPalette, color.Black, 500)
@@ -138,6 +141,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    info.changeScoreBy(1)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (game_started == true) {
         if (weapon_cooldown == true) {
@@ -178,10 +185,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     scroller.scrollBackgroundWithSpeed(50, 0)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    info.setLife(-1)
+    game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprites.destroy(sprite, effects.fire, 500)
+    sprites.destroy(sprite, extraeffects.coloredTrail, 100)
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     scroller.scrollBackgroundWithSpeed(0, 0)
@@ -544,7 +551,7 @@ function Intro () {
     story.printCharacterText("So... You have finally awoken, Warrior...", "???")
     story.printCharacterText("I have been waiting... We all have been... Even though the kingdom might seem perished... There is still hope, however slim it is...", "???")
     story.printCharacterText("Here... Take this...", "???")
-    game.splash("You Have acquired a dagger!")
+    game.splash("You recieved a dagger!")
     story.printCharacterText("You can launch it at enemies... It will always return to you... However, they are a close ranged weapon...", "???")
     animation.runImageAnimation(
     Introflower,
@@ -649,7 +656,6 @@ let jumps = 0
 let FLOWER: Sprite = null
 let game_started = false
 game_started = false
-Intro()
 story.setSoundEnabled(true)
 FLOWER = sprites.create(img`
     . . . 5 . . . 
@@ -1386,27 +1392,23 @@ weapon_cooldown = true
 dash_cooldown = true
 let volume_change = 20
 let mySprite2 = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . a . . . . . . . . . . . 
-    . . . a a a a . . . . . . a . . 
-    a . a a a a a a . . . a a a a . 
-    a a a a a a a a a a a a a a a a 
-    a a a f f a a a a a a f f a a a 
-    a a a f f a a a a a a f f a a a 
-    a a a f f a a a a a a f f a a a 
-    a a a f f a a a a a a f f a a a 
-    a a a a a a a a a a a a a a a a 
-    a a f f f f f f f f f f f f a a 
-    a a f f f f f f f f f f f f a a 
-    a a f f a a a a a a a a f f a a 
+    . . . . a a a . . . . . . . . . 
+    . . . a f f f a . . . . . . . . 
+    . . a a f f f a a . . . . . . . 
+    . a a a f f f a a a . . . . . . 
+    a a a a a a a a a a f f f f f . 
+    a a f a a a f f a f f 1 f 1 f f 
+    a a a a a a f f a f f 1 f 1 f f 
+    a a a a a a a a a f f f f f f f 
+    a a f a a a a a a f f f f f f f 
+    a a a a a a f f a f f f f f f f 
+    a a a a a a f f a a f f f f f . 
     `, SpriteKind.Enemy)
 tiles.placeOnTile(mySprite2, tiles.getTileLocation(11, 10))
-mySprite2.vx = 50
-mySprite2.setBounceOnWall(true)
-mySprite2.ay = 200
+for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+    value.ay = 200
+    value.vx = 50
+}
 forever(function () {
     if (l1r2 == 1) {
         characterAnimations.setCharacterState(FLOWER, characterAnimations.rule(Predicate.FacingLeft, Predicate.MovingLeft))
@@ -1473,5 +1475,18 @@ forever(function () {
             . . . 7 . . . 
             . . . 7 . . . 
             `)
+    }
+})
+forever(function () {
+    for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+        if (value.isHittingTile(CollisionDirection.Left)) {
+            value.vx = 50
+            value.image.flipX()
+        } else if (value.isHittingTile(CollisionDirection.Right)) {
+            value.vx = -50
+            value.image.flipX()
+        } else if (value.tileKindAt(TileDirection.Bottom, assets.tile`myTile9`) || (value.tileKindAt(TileDirection.Right, assets.tile`myTile`) || value.tileKindAt(TileDirection.Left, assets.tile`myTile2`))) {
+            value.vy = -100
+        }
     }
 })
